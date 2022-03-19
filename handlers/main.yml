@@ -1,0 +1,14 @@
+---
+- name: enable freetakserver
+  service:
+    name: "{{ fts_service_name }}"
+    enabled: "{{ fts_enabled }}"
+
+- name: set freetakserver state
+  service:
+    name: "{{ fts_service_name }}"
+    state: "{{ fts_state }}"
+
+- name: reload freetakserver
+  service:
+    name: "{{ fts_service_name }}"

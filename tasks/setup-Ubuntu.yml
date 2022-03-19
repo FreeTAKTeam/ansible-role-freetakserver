@@ -1,0 +1,42 @@
+---
+- name: Update apt
+  shell: sudo apt update
+  register: apt_update
+  retries: 5
+  ignore_errors: true
+  changed_when: false
+  until: apt_update is success
+
+- name: Detect systemctl file
+  stat:
+    path: /usr/local/bin/systemctl
+  register: systemctl_file
+
+- name: Create systemctl backup
+  copy:
+    src: /usr/local/bin/systemctl
+    dest: /usr/local/bin/systemctl.backup
+    remote_src: true
+  when: systemctl_file.stat.exists
+
+- name: Use systemctl workaround
+  get_url:
+    url: https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py
+    dest: /usr/local/bin/systemctl
+    mode: 0755
+
+- name: Delete PyYAML
+  shell: "{{ item }}"
+  loop:
+    - "rm -rf /usr/lib/python3/dist-packages/yaml"
+    - "rm -rf /usr/lib/python3/dist-packages/PyYAML-*"
+    - "rm -rf /usr/lib/python{{ python3_version }}/site-packages/PyYAML-*"
+
+- name: Install apt dependencies
+  apt:
+    name: "{{ fts_apt_dependencies | list}}"
+
+- name: "Install {{ fts_pip_package_name }}"
+  pip:
+    name: "{{ fts_pip_package_name }}"
+    executable: "pip{{ python3_version }}"
