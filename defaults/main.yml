@@ -1,0 +1,16 @@
+---
+python3_version: 3.8
+unit_files_location: /lib/systemd/system/
+
+# system information
+fts_ipv4: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0], true) }}"
+
+fts_pip_package_name: FreeTAKServer
+
+fts_service_name: fts
+
+# Set initial service state. Recommended values: `started` or `stopped`.
+fts_state: started
+
+# Enable service. Recommended values: `true` or `false`
+fts_enabled: true
