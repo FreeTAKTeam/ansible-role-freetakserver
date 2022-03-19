@@ -1,12 +1,14 @@
 ---
+# python information
 python3_version: 3.8
-unit_files_location: /lib/systemd/system/
+python3: "/usr/bin/python{{ python3_version }}"
+pip3: "pip{{ python3_version }}"
+pip_installer_url: https://bootstrap.pypa.io/get-pip.py
 
 # system information
+unit_files_location: /lib/systemd/system/
 fts_ipv4: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0], true) }}"
-
 fts_pip_package_name: FreeTAKServer
-
 fts_service_name: fts
 
 # Set initial service state. Recommended values: `started` or `stopped`.

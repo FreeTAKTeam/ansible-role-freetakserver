@@ -2,17 +2,14 @@
 dependencies: []
 
 galaxy_info:
-  role_name: freetakserver
   author: freetakteam
-  description: Free TAK Server
-  license: "EPL"
+  role_name: freetakserver
+  description: install freetakserver
+  license: license (EPL-2.0)
   min_ansible_version: "2.4"
   platforms:
-    - name: Ubuntu
-      versions:
-        - focal
+  - name: Ubuntu
+    versions:
+    - focal
   galaxy_tags:
-    - tak
-    - takserver
-    - atak
     - freetakserver
