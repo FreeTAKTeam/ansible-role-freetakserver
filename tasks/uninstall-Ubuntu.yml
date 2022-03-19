@@ -1,20 +1,13 @@
 ---
-- name: Stop service
+- name: Stop services
   service:
-    name: "{{ fts_service_name }}"
+    name: "{{ item }}"
     state: stopped
+  loop:
+    - "{{ fts_service_name }}"
+    - "{{ fts_ui_service_name }}"
+    - "{{ webmap_service_name }}"
   ignore_errors: true
-
-- name: Remove unit file
-  file:
-    path: "{{ unit_files_location }}/{{ fts_service_name }}.service"
-    state: absent
-
-- name: Uninstall
-  pip:
-    name: "{{ fts_pip_package_name }}"
-    state: absent
-    executable: "pip{{ python3_version }}"
 
 - name: Remove files
   file:
@@ -23,3 +16,17 @@
   loop:
     - "{{ fts_config_path }}"
     - "{{ fts_db_path }}"
+    - "{{ unit_files_location }}/{{ fts_service_name }}.service"
+    - "{{ unit_files_location }}/{{ fts_ui_service_name }}.service"
+    - "{{ unit_files_location }}/{{ webmap_service_name }}.service"
+    - "{{ webmap_executable_location }}"
+    - "{{ webmap_config_location }}"
+
+- name: Uninstall
+  pip:
+    name: "{{ item }}"
+    state: absent
+    executable: "pip{{ python3_version }}"
+  loop:
+    - "{{ fts_pip_package_name }}"
+    - "{{ fts_ui_pip_package_name }}"

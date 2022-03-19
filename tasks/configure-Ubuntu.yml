@@ -14,7 +14,23 @@
     line: '\1first_start = False'
     backrefs: true
 
-- name: Template unit file
+- name: Template FTS UI config file
+  template:
+    src: config.py.j2
+    dest: "{{ fts_ui_install_path }}/config.py"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Template webmap config file
+  template:
+    src: webMAP_config.json.j2
+    dest: "{{ webmap_config_location }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Template FTS unit file
   template:
     src: fts.service.j2
     dest: "{{ unit_files_location }}/{{ fts_service_name }}.service"
@@ -22,14 +38,38 @@
     group: root
     mode: 0644
 
+- name: Template FTS UI unit file
+  template:
+    src: fts-ui.service.j2
+    dest: "{{ unit_files_location }}/{{ fts_ui_service_name }}.service"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Template webmap unit file
+  template:
+    src: webmap.service.j2
+    dest: "{{ unit_files_location }}/{{ webmap_service_name }}.service"
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Kill any currently running processes
   include_tasks: kill.yml
   vars:
-    process: "FreeTAKServer.controllers.services.FTS"
+    process: "{{ item }}"
+  loop:
+    - "FreeTAKServer.controllers.services.FTS"
+    - "{{ fts_ui_install_path }}/run.py"
+    - "/opt/FTH-webmap-linux"
 
-- name: Enable and set service
+- name: Enable and set services
   include_tasks: service.yml
   vars:
-    service_name: "{{ fts_service_name }}"
-    service_enabled: "{{ fts_enabled }}"
-    service_state: "{{ fts_state }}"
+    service_name: "{{ item }}"
+    service_enabled: true
+    service_state: started
+  loop:
+    - "{{ fts_service_name }}"
+    - "{{ fts_ui_service_name }}"
+    - "{{ webmap_service_name }}"

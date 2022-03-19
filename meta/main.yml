@@ -13,3 +13,8 @@ galaxy_info:
         - focal
   galaxy_tags:
     - freetakserver
+    - freetakserver_ui
+    - webmap
+    - tak
+    - takserver
+    - atak

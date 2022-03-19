@@ -64,7 +64,61 @@
   apt:
     name: "{{ fts_apt_dependencies | list}}"
 
-- name: "Install {{ fts_pip_package_name }}"
+- name: "Install pip packages"
   pip:
-    name: "{{ fts_pip_package_name }}"
+    name: "{{ item }}"
     executable: "pip{{ python3_version }}"
+  loop:
+    - "{{ fts_pip_package_name }}"
+    - "{{ fts_ui_pip_package_name }}"
+
+- name: Install unzip
+  apt:
+    name: unzip
+  register: install_unzip
+
+- name: Get webmap release information with GitHub API
+  uri:
+    url: "{{ webmap_api_url }}"
+    return_content: true
+  register: webmap_response
+
+- name: Set facts from GitHub API release information
+  set_fact:
+    webmap_download_url: "{{ webmap_response.json.assets[0].browser_download_url }}"
+    webmap_raw_executable_name: "{{ webmap_response.json.name }}"
+
+- name: Download webmap
+  get_url:
+    url: "{{ webmap_download_url }}"
+    dest: "{{ webmap_package_location }}"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: "Unarchive {{ webmap_package }} to /tmp"
+  unarchive:
+    src: "/tmp/{{ webmap_package }}"
+    dest: /tmp
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: true
+
+- name: "Rename {{ webmap_raw_executable_name }} to {{ webmap_executable }}"
+  copy:
+    src: "/tmp/{{ webmap_raw_executable_name }}"
+    dest: "/tmp/{{ webmap_executable }}"
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: true
+
+- name: "Copy {{ webmap_executable }} to {{ webmap_executable_location }}"
+  copy:
+    src: "/tmp/{{ webmap_executable }}"
+    dest: "{{ webmap_executable_location }}"
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: true

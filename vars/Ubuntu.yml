@@ -2,13 +2,23 @@
 pip3_packages:
   - virtualenv
 
-fts_config_path: /opt/FTSConfig.yaml
-fts_db_path: /opt/FreeTAKServer.db
-
-fts_python_packages: "/usr/local/lib/python{{ python3_version }}"
-fts_install_path: "{{ fts_python_packages }}/dist-packages/FreeTAKServer"
-
 fts_apt_dependencies:
   - netbase
   - gcc
   - python3-dev
+
+# fts vars
+fts_config_path: /opt/FTSConfig.yaml
+fts_db_path: /opt/FreeTAKServer.db
+fts_python_packages: "/usr/local/lib/python{{ python3_version }}"
+fts_install_path: "{{ fts_python_packages }}/dist-packages/FreeTAKServer"
+
+# fts ui vars
+fts_ui_python_packages: "/usr/local/lib/python{{ python3_version }}"
+fts_ui_install_path: "{{ fts_ui_python_packages }}/dist-packages/FreeTAKServer-UI"
+fts_ui_sqlachemy_db_uri: /opt/FTSServer-UI.db
+
+# webmap vars
+webmap_package_location: "/tmp/{{ webmap_package }}"
+webmap_config_location: "/opt/{{ webmap_config_file }}"
+webmap_executable_location: "/usr/local/bin/{{ webmap_executable }}"

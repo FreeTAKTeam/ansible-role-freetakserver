@@ -5,14 +5,25 @@ python3: "/usr/bin/python{{ python3_version }}"
 pip3: "pip{{ python3_version }}"
 pip_installer_url: https://bootstrap.pypa.io/get-pip.py
 
+# pip information
+fts_pip_package_name: FreeTAKServer
+fts_ui_pip_package_name: FreeTAKServer-UI
+
 # system information
 unit_files_location: /lib/systemd/system/
+
+# ip information
 fts_ipv4: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0], true) }}"
-fts_pip_package_name: FreeTAKServer
+fts_ui_ipv4: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0], true) }}"
+webmap_ipv4: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0], true) }}"
+
+# service information
 fts_service_name: fts
+fts_ui_service_name: fts-ui
+webmap_service_name: webmap
 
-# Set initial service state. Recommended values: `started` or `stopped`.
-fts_state: started
-
-# Enable service. Recommended values: `true` or `false`
-fts_enabled: true
+# webmap information
+webmap_api_url: https://api.github.com/repos/FreeTAKTeam/FreeTAKHub/releases/latest
+webmap_package: webmap.zip
+webmap_executable: FTH-webmap-linux
+webmap_config_file: webMAP_config.json
