@@ -1,3 +1,5 @@
+![CI](https://github.com/FreeTAKTeam/ansible-role-freetakserver/actions/workflows/ci.yml/badge.svg)
+
 # ansible-role-freetakserver
 
 FreeTAKServer is a collection of 3 services:
