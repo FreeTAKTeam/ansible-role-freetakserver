@@ -23,3 +23,9 @@ verifier:
 lint: |
   set -e
   yamllint .
+
+scenario:
+  test_sequence:
+    - destroy
+    - create
+    - converge
