@@ -34,13 +34,14 @@ jobs:
       - name: Lint code.
         run: |
           yamllint .
+
   molecule:
     name: Molecule
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - distro: ubuntu-2004
+          - distro: ubuntu2004
             playbook: converge.yml
 
     steps:
