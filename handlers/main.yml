@@ -1,3 +1,4 @@
+---
 - name: print fts_ui url
   debug:
     msg: "FreeTAKServer-UI URL: http://{{ fts_ui_ipv4 }}:5000/"
