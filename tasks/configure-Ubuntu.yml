@@ -23,12 +23,12 @@
     mode: 0644
 
 - name: Kill any currently running processes
-  include_tasks: ../../common/tasks/kill.yml
+  include_tasks: kill.yml
   vars:
     process: "FreeTAKServer.controllers.services.FTS"
 
 - name: Enable and set service
-  include_tasks: ../../common/tasks/service.yml
+  include_tasks: service.yml
   vars:
     service_name: "{{ fts_service_name }}"
     service_enabled: "{{ fts_enabled }}"
