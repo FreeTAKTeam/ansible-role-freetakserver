@@ -6,7 +6,14 @@ FreeTAKServer is a collection of 3 services:
 1. Free TAK Server User Interface (FTS UI)
 1. Web Map for FTS UI
 
+## Ansible Galaxy Installation
+
+```
+ansible-galaxy install freetakteam.freetakserver
+```
+
 ## Example Playbook
+
 ```
 - hosts: freetakserver
   roles:
