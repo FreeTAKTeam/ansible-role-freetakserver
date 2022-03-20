@@ -10,7 +10,7 @@ name: CI
 
 defaults:
   run:
-    working-directory: 'freetakteam.freetakserver'
+    working-directory: 'jonaugustine.freetakserver'
 
 jobs:
 
@@ -21,7 +21,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'freetakteam.freetakserver'
+          path: 'jonaugustine.freetakserver'
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
@@ -48,7 +48,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'freetakteam.freetakserver'
+          path: 'jonaugustine.freetakserver'
 
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
