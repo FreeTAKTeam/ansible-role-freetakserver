@@ -3,8 +3,8 @@ dependencies: []
 
 galaxy_info:
   role_name: freetakserver
-  author: jonaugustine
-  description: Free TAK Server
+  author: FreeTAKTeam
+  description: FreeTAKServer
   license: license (EPL-2.0)
   min_ansible_version: '2.4'
   platforms:
@@ -13,7 +13,6 @@ galaxy_info:
         - focal
   galaxy_tags:
     - freetakserver
-    - freetakserver_ui
     - webmap
     - tak
     - takserver

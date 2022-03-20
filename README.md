@@ -11,7 +11,7 @@ FreeTAKServer is a collection of 3 services:
 ## Ansible Galaxy Installation
 
 ```
-ansible-galaxy install jonaugustine.freetakserver
+ansible-galaxy install FreeTAKTeam.freetakserver
 ```
 
 ## Example Playbook
@@ -19,5 +19,5 @@ ansible-galaxy install jonaugustine.freetakserver
 ```
 - hosts: freetakserver
   roles:
-     - { jonaugustine.freetakserver }
+     - { FreeTAKTeam.freetakserver }
 ```
